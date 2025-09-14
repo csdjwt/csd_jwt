@@ -122,7 +122,7 @@ ax.legend(loc="upper left", fancybox=True, framealpha=0.4, prop={'size': 9})
 plt.xlim(1, 100)
 plt.ylim(10**-2, 10**2)
 
-plt.savefig(f"{folder}/Verification latency.pdf", dpi=600, format='pdf')
+plt.savefig(f"{folder}/VC verification latency.pdf", dpi=600, format='pdf')
 plt.show()
 
 
@@ -152,7 +152,7 @@ ax.legend(loc="right", fancybox=True, framealpha=0.4, prop={'size': 9})
 plt.xlim(1, 91)
 plt.ylim(10**-2, 10**-1)
 
-plt.savefig(f"{folder}/VP issuance latency.pdf", dpi=600, format='pdf')
+plt.savefig(f"{folder}/10 VP issuance latency.pdf", dpi=600, format='pdf')
 plt.show()
 
 
@@ -181,7 +181,7 @@ ax.legend(loc="right", fancybox=True, framealpha=0.4, prop={'size': 9})
 plt.xlim(1, 91)
 plt.ylim(10**-2, 10**0)
 
-plt.savefig(f"{folder}/VP issuance latency.pdf", dpi=600, format='pdf')
+plt.savefig(f"{folder}/100 VP issuance latency.pdf", dpi=600, format='pdf')
 plt.show()
 
 
@@ -296,8 +296,61 @@ plt.savefig(f"{folder}/VP size varying disclosed claims.pdf", dpi=600, format='p
 plt.show()
 
 
-# In[ ]:
+# In[13]:
 
 
+df = pd.read_csv("./csv_dir/10_vp_verification_duration.csv")
+fig, ax = plt.subplots()
+x = range(1,101,10)
 
+ax.plot(x, df['CSD-JWT'] / 1000, label='CSD-JWT', color=csd_jwt_color, marker=csd_jwt_marker, markevery=marker_range_10, linewidth=2)
+ax.plot(x, df['SD-JWT'] / 1000, label='SD-JWT', color=sd_jwt_color, marker=sd_jwt_marker, markevery=marker_range_10, linewidth=2)
+
+ax.xaxis.set_major_locator(MultipleLocator(10))
+ax.xaxis.set_minor_locator(AutoMinorLocator(5))
+
+ax.set_yscale("log")
+
+ax.set_xlabel("Number of Disclosed Claims")
+ax.set_ylabel("Latency (ms)")
+
+ax.grid(which='major', color='#EEEEEE', linestyle='solid')
+ax.grid(which='minor', color='#EEEEEE', linestyle='solid')
+
+ax.legend(loc="right", fancybox=True, framealpha=0.4, prop={'size': 9})
+
+plt.xlim(1, 91)
+plt.ylim(10**-2, 10**1)
+
+plt.savefig(f"{folder}/10 Claims VP verification latency.pdf", dpi=600, format='pdf')
+plt.show()
+
+
+# In[14]:
+
+
+df = pd.read_csv("./csv_dir/100_vp_verification_duration.csv")
+fig, ax = plt.subplots()
+x = range(1,101,10)
+
+ax.plot(x, df['CSD-JWT'] / 1000, label='CSD-JWT', color=csd_jwt_color, marker=csd_jwt_marker, markevery=marker_range_10, linewidth=2)
+ax.plot(x, df['SD-JWT'] / 1000, label='SD-JWT', color=sd_jwt_color, marker=sd_jwt_marker, markevery=marker_range_10, linewidth=2)
+
+ax.xaxis.set_major_locator(MultipleLocator(10))
+ax.xaxis.set_minor_locator(AutoMinorLocator(5))
+ax.set_yscale("log")
+
+ax.set_xlabel("Number of Disclosed Claims")
+ax.set_ylabel("Latency (ms)")
+
+ax.grid(which='major', color='#EEEEEE', linestyle='solid')
+ax.grid(which='minor', color='#EEEEEE', linestyle='solid')
+
+ax.legend(loc="right", fancybox=True, framealpha=0.4, prop={'size': 9})
+
+plt.xlim(1, 91)
+plt.ylim(10**-2, 10**2)
+
+plt.savefig(f"{folder}/100 Claims VP verification latency.pdf", dpi=600, format='pdf')
+plt.show()
 
